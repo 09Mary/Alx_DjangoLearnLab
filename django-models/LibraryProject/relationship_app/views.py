@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render
 from .models import Library
 from django.views.generic.detail import DetailView
+from django.contrib.auth import login
 
 # ------------------
 # Book and Library Views
