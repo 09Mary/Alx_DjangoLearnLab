@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bookshelf',
     'relationship_app',
-    'accounts',
+    'bookshelf.CustomUser',
 ]
 AUTH_USER_MODEL = "accounts.CustomUser"
 
