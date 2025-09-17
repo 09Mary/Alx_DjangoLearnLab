@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import permission_required
 from django.views.decorators.csrf import csrf_protect
 from .models import Book
 from django import forms
-
+from .forms import ExampleForm
 
 # Simple form for Book model
 class BookForm(forms.ModelForm):
