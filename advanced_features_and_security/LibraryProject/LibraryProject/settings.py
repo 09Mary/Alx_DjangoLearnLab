@@ -148,3 +148,24 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # SECURITY: Enforce secure cookies to prevent session hijacking
 # SECURITY: CSP headers reduce XSS attack surface
 # SECURITY: Using Django ORM instead of raw SQL prevents SQL injection
+
+# -----------------------------
+# 🔐 Security Settings
+# -----------------------------
+
+# Redirect all HTTP requests to HTTPS
+SECURE_SSL_REDIRECT = True
+
+# HTTP Strict Transport Security (HSTS)
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+# Secure cookies (only sent via HTTPS)
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# Extra security headers
+X_FRAME_OPTIONS = "DENY"
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
