@@ -25,6 +25,25 @@ SECRET_KEY = 'django-insecure-&9_th8h3$q^o^-2rj40px+jj9^+!9@k(rmnbmi+w9dosb6p9bc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Disable debug in production
+DEBUG = False   # ✅ set to True only in development
+
+# Browser protections
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = "DENY"
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Enforce secure cookies
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+# Content Security Policy (see step 4)
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_STYLE_SRC = ("'self'", 'fonts.googleapis.com')
+CSP_SCRIPT_SRC = ("'self'",)
+CSP_FONT_SRC = ("'self'", 'fonts.gstatic.com')
+
+
 ALLOWED_HOSTS = []
 
 
@@ -124,3 +143,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# SECURITY: Disable debug mode in production
+# SECURITY: Enforce secure cookies to prevent session hijacking
+# SECURITY: CSP headers reduce XSS attack surface
+# SECURITY: Using Django ORM instead of raw SQL prevents SQL injection
