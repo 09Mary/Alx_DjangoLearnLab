@@ -1,0 +1,34 @@
+from django.urls import path
+from . import views
+from .views import register, CustomLoginView, CustomLogoutView
+from .views import list_books
+
+urlpatterns = [
+    # Existing routes for your app
+    path("books/", views.list_books, name="list_books"),  
+    path("library/<int:pk>/", views.LibraryDetailView.as_view(), name="library_detail"),
+
+    # Authentication routes
+    path("register/", register, name="register"),
+    path("login/", LoginView.as_view(template_name="relationship_app/login.html"), name="login"),
+    path("logout/", LogoutView.as_view(template_name="relationship_app/logout.html"), name="logout"),
+
+ #role-based views
+     path("admin-role/", views.admin_view, name="admin_view"),
+    path("librarian-role/", views.librarian_view, name="librarian_view"),
+    path("member-role/", views.member_view, name="member_view"),
+
+    path("books/", views.list_books, name="list_books"),
+    path("library/<int:pk>/", views.LibraryDetailView.as_view(), name="library_detail"),
+
+
+    # Role-based
+    path("admin-dashboard/", views.admin_view, name="admin_view"),
+    path("librarian-dashboard/", views.librarian_view, name="librarian_view"),
+    path("member-dashboard/", views.member_view, name="member_view"),
+
+    # Book CRUD (with permissions)
+    path("books_add/", views.add_book, name="add_book"),           # <-- must exist
+    path("edit_books/<int:book_id>/edit/", views.edit_book, name="edit_book"),  # <-- must exist
+    path("delete_books/<int:book_id>/delete/", views.delete_book, name="delete_book"),
+]
