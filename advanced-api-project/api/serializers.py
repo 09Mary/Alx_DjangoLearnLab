@@ -8,6 +8,12 @@ class BookSerializer(serializers.ModelSerializer):
         model = Book
         fields = ['title', 'publication_year']
 
+#custom for publication year  
+ def validate(self, data):
+        if len(data['publication_year']) < 5:
+            raise serializers.ValidationError("publication year can not be future.")
+        return data     
+
 # AuthorSerializer includes nested BookSerializer to show related books
 class AuthorSerializer(serializers.ModelSerializer):
 
