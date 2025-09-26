@@ -1,5 +1,5 @@
 
-from rest_framework import serializers
+from rest_framework import serializers, generics
 from .models import Book,Author
 
 # BookSerializer serializes all fields and validates publication_year
@@ -23,3 +23,15 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = ["id", "name", "bio", "books"]  
+
+class BookCreatView(generics.CreateAPIView):
+
+    def perform_create(self, serializer):
+        return super().perform_create(serializer)
+    
+class BookUpdateView(generics.CreateAPIView):
+
+    def check_permissions(self, request):
+        return super().check_permissions(request)   
+
+
