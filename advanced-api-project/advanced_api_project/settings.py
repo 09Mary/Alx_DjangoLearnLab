@@ -25,7 +25,16 @@ SECRET_KEY = 'django-insecure-=e!ht_mu18rg9(ix2jcxebp#yn3hp$rgz^jmfo0a2mf&mex49g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [] 
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+    ]
+}
+
 
 
 # Application definition
