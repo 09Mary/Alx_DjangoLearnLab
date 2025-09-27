@@ -2,7 +2,7 @@ from rest_framework import generics, filters
 from .models import Book #replace with your working model
 from .serializers import BookSerializer # replace with your project's serializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated, IsAuthenticated
-from django_filters import rest_framework
+from django_filters.rest_framework import DjangoFilterBackend
 
 class BookCreateView(generics.CreateAPIView):
 # can be any name, ensure to align with your project as this is sample exampls 
