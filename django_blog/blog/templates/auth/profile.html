@@ -1,6 +1,15 @@
-<form method="post">
-  {% csrf_token %}
-  <label>Email:</label>
-  <input type="email" name="email" value="{{ user.email }}">
-  <button type="submit">Update</button>
-</form>
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ request.user.username }}'s profile</h2>
+
+<p>Full name: {{ request.user.get_full_name }}</p>
+<p>Email: {{ request.user.email }}</p>
+<p>Bio: {{ request.user.profile.bio|default:"No bio yet." }}</p>
+
+{% if request.user.profile.avatar %}
+  <img src="{{ request.user.profile.avatar.url }}" alt="avatar" style="max-width:200px;">
+{% endif %}
+
+<p><a href="{% url 'profile_edit' %}">Edit profile</a></p>
+<p><a href="{% url 'logout' %}">Logout</a></p>
+{% endblock %}

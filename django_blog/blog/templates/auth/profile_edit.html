@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Edit profile</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ u_form.non_field_errors }}
+  {{ p_form.non_field_errors }}
+
+  <fieldset>
+    <legend>User info</legend>
+    {{ u_form.as_p }}
+  </fieldset>
+
+  <fieldset>
+    <legend>Profile</legend>
+    {{ p_form.as_p }}
+  </fieldset>
+
+  <button type="submit">Save changes</button>
+</form>
+{% endblock %}
