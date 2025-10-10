@@ -1,0 +1,22 @@
+from django.db import models
+from django.contrib.auth.models import User, Post
+
+class posts(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
+    title = models.CharField(max_length=200)
+    Content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)    
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+class comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    author =models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    Content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)    
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'Comment by {self.author.username} on {self.post.title}'
