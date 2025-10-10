@@ -1,6 +1,8 @@
 from rest_framework import viewsets, permissions, filters
 from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
@@ -23,3 +25,17 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+
+@login_required
+def user_feed(request):
+    followed_users = request.user.following.all()
+    posts = Post.objects.filter(author__in=followed_users).order_by('-id')[:50]
+    data = [{
+        'author': post.author.username,
+        'content': post.content,
+        'timestamp': post.id
+    } for post in posts]
+    return JsonResponse({'feed': data})
+
+
