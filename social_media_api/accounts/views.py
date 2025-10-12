@@ -5,17 +5,22 @@ from .serializers import RegisterSerializer, LoginSerializer, ProfileSerializer
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import permissions, status
-
+from .serializers import SimpleUserSerializer
 from rest_framework.views import APIView
 
 from rest_framework import generics, permissions
 from django.conf import settings
 
-from .models import Post
+from .models import CustomUser, Post
 from .serializers import PostSerializer
 from rest_framework.pagination import PageNumberPagination
 
 User = get_user_model()
+
+class UserListView(generics.ListAPIView):
+    queryset = CustomUser.objects.all()  
+    serializer_class = SimpleUserSerializer
+    permission_classes = [permissions.IsAuthenticate]
 
 class FeedPagination(PageNumberPagination):
     page_size = 10
@@ -24,7 +29,7 @@ class FeedPagination(PageNumberPagination):
 
 class FeedView(generics.ListAPIView):
     serializer_class = PostSerializer
-    permission_classes = [permissions.IsAuthenticated]   # feed is private to logged-in users
+    permission_classes = [permissions.IsAuthenticated]  
     pagination_class = FeedPagination
 
     def get_queryset(self):
