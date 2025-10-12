@@ -3,6 +3,10 @@ from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
 User = get_user_model()
+class SimpleUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'profile_picture', 'bio']
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
